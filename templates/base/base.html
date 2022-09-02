@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %}{% endblock title %} - AzizLab </title>
+    <link rel="stylesheet" href="{% static 'transformer/css/bootstrap.css' %}">
+</head>
+<body>
+{% include 'base/navbar.html' %}
+    <div class="container">
+        {% block body %}
+        {% endblock body %}
+    </div>
+</body>
+</html>
