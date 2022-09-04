@@ -1,5 +1,36 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block title %}Transformer{% endblock title %}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'transformer/css/tr.css' %}">
+{% endblock header %}
 {% block body %}
-    <h1 class="h-100">Transformer!!</h1>
+    <div class="info-container">
+    <h3 class="title h3">
+        Table Transformer
+    </h3>
+    <span class="info-transformer text-center">
+        Upload csv or excel file, and apply different types of transformations.
+        Such as Encoding categorical variables, numeric scaling and so on.
+    </span>
+    </div>
+    <div class="form-container">
+        <div class = "form-control">
+            <form class="file-upload" >
+                <input type="file" class="file-upload">
+                <br>
+                <input type="submit" class="btn-dark">
+            </form>
+            <hr>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ file_form }}
+                <input type="submit" class="btn-dark">
+            </form>
+        </div>
+    </div>
+
+
+
+
 {% endblock body %}

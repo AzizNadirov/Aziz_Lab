@@ -1,0 +1,8 @@
+input.file-upload{
+    display: flex;
+}
+span.info-transformer{
+    display: block;
+    border: dashed #0b2e13 thin;
+    margin: 15px;
+}

@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title> {% block title %}{% endblock title %} - AzizLab </title>
-    <link rel="stylesheet" href="{% static 'transformer/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.css' %}">
+    {% block header %}
+{#        for css connections#}
+    {% endblock header %}
 </head>
 <body>
 {% include 'base/navbar.html' %}
@@ -12,5 +15,7 @@
         {% block body %}
         {% endblock body %}
     </div>
+{% block body_js %}{% endblock body_js %}
+<script src="{% static 'base/js/bootstrap.js' %}"></script>
 </body>
 </html>

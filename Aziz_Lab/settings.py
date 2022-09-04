@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.transformer.apps.TransformerConfig',
     'apps.main.apps.MainConfig',
+    'apps.api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
