@@ -8,5 +8,5 @@ from apps.transformer.views import Transformer
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePageView.as_view(), name = "home_page"),
-    path('transformer', Transformer.as_view(), name = "transformer"),
+    path('transformer/', Transformer.as_view(), name = "transformer"),
 ]

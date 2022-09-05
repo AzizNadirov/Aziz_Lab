@@ -1,8 +1,8 @@
 import pandas as pd
 
-def read_csv_return_json(file, n_rows):
+def read_csv_return_json(file, n_rows, html = False, html_index = True):
     """"
-    Returns first n_rows in json variant of csv/xls/xlsx file
+    Returns first n_rows in dict/html variant of csv/xls/xlsx file
     """
     if file.name.split('.')[-1] == 'csv':
         data = pd.read_csv(file)
@@ -11,5 +11,8 @@ def read_csv_return_json(file, n_rows):
     else:
         return -1
     data_first_n = data.head(n_rows)
-    return data_first_n.to_json()
+    if not html:
+        return data_first_n.to_dict()
+    else:
+        return data_first_n.to_html(index = html_index)
 
