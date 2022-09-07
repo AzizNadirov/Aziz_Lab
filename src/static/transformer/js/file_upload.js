@@ -1,27 +1,53 @@
-function load_table(form){
-  const BASE_URL = "http://127.0.0.1:8000/"
-  const upload_btn = document.getElementById('btn-upload')
-  upload_btn.addEventListener('click',
-    function (e) {
-        e.preventDefault();
-        $.ajax({
-          type: 'POST',
-          url: "http://127.0.0.1:8000/" + "transformer/",
-          data: {file : new FormData(form),
-                  csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()},
-          processData: false,
-          contentType: false
-          })
-          .done(function (json) {
-            console.log("ok !!")
-            console.log(json)
-            })
-          .fail(function (json) {
-            console.log("upps !!")
-            console.log(json)
-            })
-    }
-    )
+function load_table2(ting_url, aing_url){
+  const BASE_URL = "http://127.0.0.1:8000/";
+  const btn_load = document.getElementById('btn_load');
+  const file_input = document.getElementById("file_input");
+  const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]');
+
+  function listener(e){
+    console.log("click!")
+    e.preventDefault();
+    var data = new FormData();
+    data.append("file", file_input.files[0]);
+    data.append("csrfmiddlewaretoken", csrf_token.value);
+    data.append("delimeter",  document.getElementById("delimeter").value)
+
+    fetch(BASE_URL + "transformer/",
+        {method: "POST", body: data}
+        ).then(
+            response => response.json() // if the response is a JSON object
+        ).then(
+            success => {
+                console.log(success)
+                document.getElementById('preload_file').remove()
+                document.getElementsByClassName('h3')[0].innerText =
+                    `Table preview(${success.stats.rows}x${success.stats.cols}):`
+                var table = document.getElementById("table")
+                table.innerHTML = success.table
+                document.getElementById("table_pre_stats").innerHTML = success.stats.stat_table;
+                insert_buttons(ting_url, aing_url)
+            }
+        ).catch(
+          error => {console.log(error);
+                    console.log(ting_url, aing_url)
+          }// Handle the error response object
+        );
   }
-const form = document.getElementById("table-upload-form")
-load_table(form)
+  btn_load.addEventListener('click', listener)
+}
+
+function insert_buttons(url_ting, url_aing){
+    const tranform_or_analysis =
+    `<button class="btn-success btn-block" id="btn_transform">
+        <a href=${url_ting}>GoTo <b>Transform</b></a>
+     </button>
+     <button class="btn-success btn-block" id="btn_analisis">
+        <a href=${url_aing}>GoTo <b>Analising</b></a>
+     </button>`
+
+    document.getElementById('tranform_or_analysis').innerHTML = tranform_or_analysis
+}
+
+
+
+

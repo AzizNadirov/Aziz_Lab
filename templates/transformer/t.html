@@ -6,27 +6,41 @@
 {% endblock header %}
 {% block body %}
     <div class="info-container">
-    <h3 class="title h3">
+    <h5 class="title h3">
         Table Transformer
-    </h3>
-    <div class = "preload_file">
+    </h5>
+    <div id = "preload_file">
        <span class="info-transformer text-center">
             Upload csv or Excel file, and apply different types of transformations.
             Such as Encoding categorical variables, numeric scaling and so on.
         </span>
         <div class="form-container">
-                <form method="post" enctype="multipart/form-data" id="table-upload-form">
+                <form method="post" preloadenctype="multipart/form-data" id="table_upload_form">
                     {% csrf_token %}
-                    <input type="file" id="file-input">
-                    <input type="submit" class="upload_file btn-success" id="btn-upload">
+                    <input type="file" id="file_input" accept="text/csv,.txt,.xls,.xlsx" required>
+                    <br>
+                    <label for="delimeter">Delimeter - for csv files</label>
+                    <input type="text" id="delimeter" value=",">
+                    <br>
+                    <button type="submit" class="btn-success" id = "btn_load">Load</button>
                 </form>
             </div>
         </div>
     </div>
-    <div class="table-hover table" id="table">
-
+    <div class="table-hover table-active table-responsive" id="table">
+    {#div for table#}
     </div>
+    <br>
+    <div class="card table-hover table-active table-responsive" id="table_pre_stats">
+    {#div for stat_table#}
+    </div>
+    <div id="tranform_or_analysis" class="btn-success">
+{#   div for buttons#}
+    </div>
+    <script src="{% static 'transformer/js/file_upload.js' %}"></script>
+    <script !src="">
+        load_table2("{% url 'ting' %}", "{% url 'aing' %}")
+    </script>
 {% endblock body %}
 {% block body_js %}
-    <script src="{% static 'transformer/js/file_upload.js' %}"></script>
 {%  endblock body_js %}

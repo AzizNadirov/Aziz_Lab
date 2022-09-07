@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Transforming{% endblock title %}
+{% block body %}
+    Analising !!
+
+    {% block body_js %}
+        <script src="{% static 'transformer/js/aing.js' %}"></script>
+    {% endblock body_js %}
+{% endblock body %}
