@@ -3,7 +3,113 @@
 {% block title %}Transforming{% endblock title %}
 {% block body %}
     Transforming !!
-
+    <div class="row">
+        <div class="col-md-8 col-lg-8">
+            <div class="table-responsive table-hover">
+                {{ table|safe }}
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+                <div class="card" id="scaler_card">
+                    <div class="card-header">
+                        <span class="h6" id="h_scaling">Scaling</span>
+                    </div>
+                    <div class="card-body tool_item">
+                        <ul class="scaler_item">
+                            <li>
+                                Standard Scaling<br>
+                                <select name="std" id="slct_std" multiple size="3" class="select2-dropdown">
+                                    {% for num in numerics %}
+                                        <option value="{{ num }}" label="{{ num }}">{{ num }}</option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                            <li>
+                                MinMax Scaling<br>
+                                <select name="mm" id="slct_mm" multiple size="3" class="select2-dropdown">
+                                    {% for num in numerics %}
+                                        <option value="{{ num }}" label="{{ num }}">{{ num }}</option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                            <li>
+                                Robust Scaling<br>
+                                <select name="rb" id="slct_rb" multiple size="3" class="select2-dropdown">
+                                    {% for num in numerics %}
+                                        <option value="{{ num }}" label="{{ num }}">{{ num }}</option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card" id="encoder_card">
+                    <div class="card-header">
+                        <span class="h6" id="h_scaling">Encoding</span>
+                    </div>
+                    <div class="card-body tool_item">
+                        <ul class="encoder_item">
+                            <li>
+                                Label Encoding(Ordinals)<br>
+                                <select name="lb" id="slct_lb" multiple size="3" class="select2-dropdown">
+                                    {% for cat in categorics %}
+                                        <option value="{{ cat }}" label="{{ cat }}">{{ cat }}</option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                            <li>
+                                One Hot Encoding(Nominals)<br>
+                                <select name="oh" id="slct_oh" multiple size="3" class="select2-dropdown">
+                                    {% for cat in categorics %}
+                                        <option value="{{ cat }}" label="{{ cat }}">{{ cat }}</option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card" id="imputer_card">
+                    <div class="card-header">
+                        <span class="h6" id="h_imputing">Imputing</span>
+                    </div>
+                    <div class="card-body tool_item">
+                        <ul class="imputer_item">
+                            <li>Label Encoding(Ordinals)</li>
+                            <li>One Hot Encoding(Nominals)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card" id="remover_card">
+                    <div class="card-header">
+                        <span class="h6 text-danger" id="h_remover">Remove</span>
+                    </div>
+                    <div class="card-body tool_item">
+                        <select name="rm" id="slct_rm" multiple size="5" class="select2-dropdown">
+                                    {% for num in numerics %}
+                                        <option value="{{ num }}" label="{{ num }}">{{ num }}</option>
+                                    {% endfor %}
+                                    {% for cat in categorics %}
+                                        <option value="{{ cat }}" label="{{ cat }}">{{ cat }}</option>
+                                    {% endfor %}
+                                </select>
+                    </div>
+                </div>
+                <div class="card" id="table_info">
+                    <span class="card-header h6">Table info:</span>
+                    <div class="card-body" id="table_stat">
+                        <div class="table table-responsive table-hover">
+                            {{ row_col|safe }}
+                            <br>
+                            {{ null_dtype|safe }}
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="btn_apply">Apply! </button>
+        </form>
+    </div>
+    </div>
     {% block body_js %}
         <script src="{% static 'transformer/js/ting.js' %}"></script>
     {% endblock body_js %}

@@ -15,16 +15,15 @@ function load_table2(ting_url, aing_url){
     fetch(BASE_URL + "transformer/",
         {method: "POST", body: data}
         ).then(
-            response => response.json() // if the response is a JSON object
+            response => response.json()
         ).then(
             success => {
                 console.log(success)
                 document.getElementById('preload_file').remove()
-                document.getElementsByClassName('h3')[0].innerText =
-                    `Table preview(${success.stats.rows}x${success.stats.cols}):`
                 var table = document.getElementById("table")
                 table.innerHTML = success.table
-                document.getElementById("table_pre_stats").innerHTML = success.stats.stat_table;
+                document.getElementById("table_pre_stats").innerHTML =
+                    success.stats.stat_table + "<br>" + success.stats.row_col;
                 insert_buttons(ting_url, aing_url)
             }
         ).catch(
