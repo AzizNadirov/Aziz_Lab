@@ -7,7 +7,7 @@ from .forms import FileUploadForm
 import json
 
 from .ds.load_table import read_csv_return_html, get_basic_stats
-from .ds.transforming import _restore_file, load_hdf_to, select_dtypes
+from .ds.transforming import _restore_file, load_hdf_to, select_dtypes, apply_todo
 
 
 class Transformer(View):
@@ -40,8 +40,9 @@ class Transforming(View):
         data = dict(json.loads(request.body))
         todo = data['todo']
         todo = {k: v for k, v in todo.items() if v}
-
-        return HttpResponse(todo)
+        tables = apply_todo(todo)
+        print(tables)
+        return JsonResponse(tables)
 
 
 

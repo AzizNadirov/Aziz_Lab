@@ -76,7 +76,6 @@ function collect_tools_apply(){
 function _post_to_transforming(data){
     data = {'todo' : data}
     data = JSON.stringify(data)
-    console.log(data)
     let csrtoken = get_cookie('csrftoken');
     fetch(BASE_URL + "transformer/ting/",
         {method: "POST",
@@ -88,6 +87,7 @@ function _post_to_transforming(data){
         ).then(
             success => {
                 _drawTable_and_statTable(success)
+                console.log(success)
             }
         ).catch(
           error => {console.log(error);

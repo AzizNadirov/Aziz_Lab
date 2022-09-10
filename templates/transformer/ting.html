@@ -5,7 +5,7 @@
     Transforming !!
     <div class="row">
         <div class="col-md-8 col-lg-8">
-            <div class="table-responsive table-hover">
+            <div class="table-responsive table-hover" id="table">
                 {{ table|safe }}
             </div>
         </div>
@@ -99,7 +99,7 @@
                 <div class="card" id="table_info">
                     <span class="card-header h6">Table info:</span>
                     <div class="card-body" id="table_stat">
-                        <div class="table table-responsive table-hover">
+                        <div class="table table-responsive table-hover" id="table_pre_stats">
                             {{ row_col|safe }}
                             <br>
                             {{ null_dtype|safe }}
