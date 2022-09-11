@@ -14,14 +14,14 @@ class Transformer(View):
     def get(self, request):
         template_name = "transformer/t.html"
         form = FileUploadForm()
-        context = {'file_form':form}
-        return render(request, template_name, context = context)
+        context = {'file_form': form}
+        return render(request, template_name, context=context)
 
     def post(self, request):
         delimeter = request.POST['delimeter']
         template_name = "transformer/t.html"
         file = request.FILES['file']
-        r = read_csv_return_html(file, 20, html = True, html_index = False, stat_table_to_html=True)
+        r = read_csv_return_html(file, 20, html=True, html_index=False, stat_table_to_html=True)
         print(r)
         return JsonResponse(r)
 

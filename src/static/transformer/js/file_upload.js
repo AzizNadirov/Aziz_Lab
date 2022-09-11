@@ -2,7 +2,7 @@ function load_table2(ting_url, aing_url){
   const BASE_URL = "http://127.0.0.1:8000/";
   const btn_load = document.getElementById('btn_load');
   const file_input = document.getElementById("file_input");
-  const csrf_token = document.querySelector('input[name="csrfmiddleware{'todo': 'ok'}token"]');
+  const csrf_token = document.querySelector('input[name="csrfmiddlewaretoken"]');
 
   function listener(e){
     console.log("click!")

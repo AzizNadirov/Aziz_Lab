@@ -2,14 +2,12 @@ from typing import Sequence
 import pandas as pd
 
 
-
-def _remover(df: pd.DataFrame,
-                cols: Sequence) -> pd.DataFrame:
+def _remover(df: pd.DataFrame, cols: Sequence) -> pd.DataFrame:
     return df.drop(columns=cols, axis=1)
 
 
 def _uni_encoder(df: pd.DataFrame,
-                cols: Sequence, encoder: str) -> pd.DataFrame:
+                 cols: Sequence, encoder: str) -> pd.DataFrame:
     """"
         Takes dataframe and column names. Returns dataframe concat dummied columns.
 
@@ -65,6 +63,7 @@ def _uni_scaler(df: pd.DataFrame, cols_for_scaling: Sequence, scaler: str):
         df[col] = scaler.fit_transform(df[[col]])
 
     return df
+
 
 def divide_and_transform(df: pd.DataFrame, todo: dict):
     SCALERS = ('std', 'mm', 'rb')
