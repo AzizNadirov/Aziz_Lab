@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Logout {% endblock title %}]
+{% block body %}
+    <h4>You have logged out!</h4>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+            <a class = "btn btn-success" href = "{% url 'login' %}">Login</a>
+        </div>
+
+        <div class="col-md-3 col-md-offset-3">
+            <a class = "btn btn-success" href = "{% url 'register' %}">Register</a>
+        </div>
+
+    </div>
+{% endblock %}

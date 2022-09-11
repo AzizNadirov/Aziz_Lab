@@ -18,9 +18,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    "crispy_forms",
+    "crispy_bootstrap5",
+
     'apps.transformer.apps.TransformerConfig',
     'apps.main.apps.MainConfig',
     'apps.api.apps.ApiConfig',
+    'apps.account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -63,13 +68,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
@@ -112,4 +111,14 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.profiling.ProfilingPanel',
 ]
 
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 INTERNAL_IPS = ['127.0.0.1',]
+
+LOGIN_URL = 'login'
+# LOGIN_REDIRECT_URL = 'account'
+
+
+AUTH_USER_MODEL = 'account.Account'

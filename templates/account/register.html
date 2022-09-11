@@ -1,0 +1,30 @@
+{% extends 'base/base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Register-AzePUG {% endblock %}
+{% block body %}
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Join Now!
+                </legend>
+                {{form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type = 'submit'>
+                    Register!
+                </button>
+            </div>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Are you from us?
+                    <a href="{% url 'login'%}" class="ml-2"> Login</a>
+                </small>
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}
