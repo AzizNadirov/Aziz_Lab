@@ -1,7 +1,6 @@
-from django.urls import path, include
+from django.urls import path
 
-from apps.transformer.views import Transformer
-
+from .views import HomePageView
 urlpatterns = [
-    path('', include('apps.main.urls'), name="home"),
+    path('', HomePageView.as_view(), name="home"),
 ]
