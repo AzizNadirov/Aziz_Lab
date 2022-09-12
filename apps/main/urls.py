@@ -1,7 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 
 from apps.transformer.views import Transformer
 
 urlpatterns = [
-    path('apps/transformer', Transformer.as_view(), name = "transformer"),
+    path('', include('apps.main.urls'), name="home"),
 ]

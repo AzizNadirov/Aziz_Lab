@@ -21,11 +21,15 @@ INSTALLED_APPS = [
 
     "crispy_forms",
     "crispy_bootstrap5",
+    'ckeditor',
 
     'apps.transformer.apps.TransformerConfig',
     'apps.main.apps.MainConfig',
     'apps.api.apps.ApiConfig',
     'apps.account.apps.AccountConfig',
+    'apps.blog.apps.BlogConfig',
+    'apps.forum.apps.ForumConfig',
+    'apps.base.apps.BaseConfig',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +122,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 INTERNAL_IPS = ['127.0.0.1',]
 
 LOGIN_URL = 'login'
-# LOGIN_REDIRECT_URL = 'account'
-
-
+LOGIN_REDIRECT_URL = 'transformer'
 AUTH_USER_MODEL = 'account.Account'
+
+ckeditor_uploader = 'uploads/'
+CKEDITOR_UPLOAD_PATH = 'uploads/ckeditor/'
