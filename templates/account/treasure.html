@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load base_temptags %}
+{% block title %} {{user.user_name}}'s Treasure {% endblock title %}
+{% block body %}
+    {% for app_name, qset in qsets.items %}
+        <div class="h4">
+            {{app_name}}({{qset|length}})
+        </div>
+        {% object_list qset=qset %}
+    {% empty %}
+        <div class="h4">Empyt</div>
+    {% endfor %}
+
+{% endblock body %}
+
+

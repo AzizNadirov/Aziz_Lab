@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    {{u.user_name}} - AzePUG 
+{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'users/user.css' %}">
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="content-section">
+            <div class="media">
+                <img src="{{u.image.url}}"  class="rounded-circle account-img avatar">
+                <div class="media-body">
+                    <h2 class="account-heading">
+                        {{u.user_name}}
+                    </h2>
+                    <p class="text-secondary">
+                        {{u.email}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% if request.user == u %}
+    <div class="row">
+        <a href="{% url 'logout' %}" class="btn btn-sm btn-danger" style="display: block;"> Hesabdan çıx</a>
+        <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-danger"> Redaktə et</a>
+    </div>
+</div>
+{% endif %}
+{% endblock body %}

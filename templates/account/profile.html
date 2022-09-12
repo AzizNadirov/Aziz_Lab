@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load base_temptags %}
+{% block title %}
+    {{user.user_name}} - AzePUG 
+{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'account/js/user.css' %}">
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="content-section">
+            <div class="media">
+                <img src="{{user.image.url}}"  class="rounded-circle account-img avatar">
+                <div class="media-body">
+                    <h2 class="account-heading">
+                        {{user.user_name}}
+                    </h2>
+                    <p class="text-secondary">
+                        {{user.email}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row login-logout">
+        <a href="{% url 'logout' %}" class="btn btn-sm btn-danger" style="display: block;"> Log Out</a>
+        <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-danger mx-3"> Edit</a>
+    </div>
+    <div class="row saved-posts">
+        <a class = "btn btn-primary" href = "{% url 'my_treasure' %}"> My Treasure</a>
+    </div>
+    <div class="last_activity">
+        <span class = "last-activity-title">My last activity:</span>
+        <div class="row recent-posts">
+            {% for post in recents.post %}
+               <div class="card rp-item">
+                   <a class="card-title rp-title" href = "{{post.get_absolute_url}}">{{post.title}}</a>
+                   <p class="card-body">
+                       {{post.content|safe|truncatewords:20}}
+                   </p>
+               </div> 
+            {% empty %}
+               <span>There is nothing for display...</span>
+            {% endfor %}
+        </div>
+        <div class="row recent-questions">
+            <h5 class="rp-title">Son suallar</h5>
+            {% for q in recents.question %}
+            <div class="card rp-item">
+                <a class="card-title rp-title" href = "{{q.get_absolute_url}}">{{q.title}}</a>
+                <div class = "card-subtitle mx-1">
+                    <i>Date:  {{q.date_created}}
+                        Likes:[{{q.like_count}}] || Views [{{q.views}}]
+                    </i>
+                    <hr>
+                </div>
+                <p class="card-body">
+                    {{q.content|safe|truncatewords:20}}
+                </p>
+            </div> 
+            {% empty %}
+                <span>There is nothing for display...</span>
+            {% endfor %}
+        </div>
+        <div class="row recent-questions">
+            <h5 class="rp-title">Recent answers</h5>
+            {% for a in recents.answer %}
+            <div class="card rp-item">
+                <a class="card-title rp-title" href = "{{a.get_absolute_url}}">{{a.question.title}}</a>
+                <div class = "card-subtitle mx-1">
+                    <i>at:  {{a.date_created}}
+                        Likes:[{{a.like_count}}] || Views [{{a.views}}]
+                    </i>
+                    <hr>
+                </div>
+                <p class="card-body">
+                    {{a.content|safe|truncatewords:20}}
+                </p>
+            </div> 
+            {% empty %}
+                <span>There is nothing for display...</span>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

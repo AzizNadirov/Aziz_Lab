@@ -57,8 +57,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+            'base_temptags': 'templatetags.base_temptags',
         },
     },
+    }
 ]
 
 WSGI_APPLICATION = 'Aziz_Lab.wsgi.application'

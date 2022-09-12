@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block title %}Edit profile - {{user.user_name}} {% endblock %}
+{% load crispy_forms_tags %}
+{% block body %}
+<ul>
+    <li><img class = "rounded-circle account-img" src="{{user.image.url}}" alt="user avatar"></li>
+    <li><h3>{{user.user_name}}</h3></li>
+    <li><h3>{{user.email}}</h3></li>
+</ul>
+<hr>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Edit
+            </legend>
+            {{comment_form.media}}
+            {{form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">
+                Apply
+            </button>
+        </div>
+    </form>
+{% endblock %}
