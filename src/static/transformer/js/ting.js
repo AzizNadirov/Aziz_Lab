@@ -21,6 +21,10 @@ function _drawTable_and_statTable(success_json){
     let table = document.getElementById("table")
     table.innerHTML = success_json.table
     document.getElementById("table_pre_stats").innerHTML = success_json.stats.stat_table;
+    let tables = document.getElementsByTagName("table")
+    for (table of tables) {
+        table.className = table.className + " " + "table"
+    }
 }
 
 
@@ -28,7 +32,7 @@ function _drawTable_and_statTable(success_json){
 function load_hdf(btn){
     function listener(e){
     e.preventDefault();
-    fetch(BASE_URL + "transformer/",
+    fetch(BASE_URL + "apps/transformer/",
         {method: "GET"}
         ).then(
             response => response.json()
@@ -77,7 +81,7 @@ function _post_to_transforming(data){
     data = {'todo' : data}
     data = JSON.stringify(data)
     let csrtoken = get_cookie('csrftoken');
-    fetch(BASE_URL + "transformer/ting/",
+    fetch(BASE_URL + "apps/transformer/ting/",
         {method: "POST",
             body: data,
             headers: {"X-CSRFToken" : csrtoken, "Content-Type": "application/json"}

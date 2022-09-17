@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import FileUploadForm
 
@@ -10,7 +11,7 @@ from .ds.load_table import read_csv_return_html, get_basic_stats
 from .ds.transforming import _restore_file, load_hdf_to, select_dtypes, apply_todo
 
 
-class Transformer(View):
+class Transformer(View, LoginRequiredMixin):
     def get(self, request):
         template_name = "transformer/t.html"
         form = FileUploadForm()
@@ -25,16 +26,17 @@ class Transformer(View):
         print(r)
         return JsonResponse(r)
 
-class Transforming(View):
+
+class Transforming(View, LoginRequiredMixin):
     def get(self, request):
         data = _restore_file()
         stat = get_basic_stats(data, to_html=True)
         dtypes = select_dtypes(data)
         r = load_hdf_to(to_html=True, index=False)
         template_name = "transformer/ting.html"
-        context = {'table' : r, 'numerics':dtypes['numerics'], 'categorics':dtypes['categorics'],
-                   'row_col':stat['row_col'], 'null_dtype':stat['stat_table']}
-        return render(request,template_name, context)
+        context = {'table': r, 'numerics': dtypes['numerics'], 'categorics': dtypes['categorics'],
+                   'row_col': stat['row_col'], 'null_dtype': stat['stat_table']}
+        return render(request, template_name, context)
 
     def post(self, request):
         data = dict(json.loads(request.body))
@@ -45,12 +47,11 @@ class Transforming(View):
         return JsonResponse(tables)
 
 
-
-class Analising(View):
+class Analising(View, LoginRequiredMixin):
     def get(self, request):
         data = _restore_file()
         template_name = "transformer/aing.html"
-        return render(request,template_name)
+        return render(request, template_name)
 
     def post(self, request):
         pass

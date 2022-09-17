@@ -12,7 +12,7 @@ function load_table2(ting_url, aing_url){
     data.append("csrfmiddlewaretoken", csrf_token.value);
     data.append("delimeter",  document.getElementById("delimeter").value)
 
-    fetch(BASE_URL + "transformer/",
+    fetch(BASE_URL + "apps/transformer/",
         {method: "POST", body: data}
         ).then(
             response => response.json()
@@ -25,6 +25,10 @@ function load_table2(ting_url, aing_url){
                 document.getElementById("table_pre_stats").innerHTML =
                     success.stats.stat_table + "<br>" + success.stats.row_col;
                 insert_buttons(ting_url, aing_url)
+                let tables = document.getElementsByTagName("table")
+                for (let t of tables) {
+                    t.className = t.className + " " + "table"
+                }
             }
         ).catch(
           error => {console.log(error);
