@@ -27,8 +27,6 @@ function _drawTable_and_statTable(success_json){
     }
 }
 
-
-
 function load_hdf(btn){
     function listener(e){
     e.preventDefault();

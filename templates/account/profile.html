@@ -33,10 +33,11 @@
         <a class = "btn btn-primary" href = "{% url 'my_treasure' %}"> My Treasure</a>
     </div>
     <div class="last_activity">
-        <span class = "last-activity-title">My last activity:</span>
-        <div class="row recent-posts">
+        <span class = "h4">My last activity:</span>
+    <br/>
+        <div class="row recent-posts mx-1">
             {% for post in recents.post %}
-               <div class="card rp-item">
+               <div class="card rp-item  mx-1">
                    <a class="card-title rp-title" href = "{{post.get_absolute_url}}">{{post.title}}</a>
                    <p class="card-body">
                        {{post.content|safe|truncatewords:20}}
@@ -46,10 +47,11 @@
                <span>There is nothing for display...</span>
             {% endfor %}
         </div>
-        <div class="row recent-questions">
-            <h5 class="rp-title">Son suallar</h5>
+        <div class="row recent-questions  mx-1">
+            <h5 class="rp-title">Recent questions</h5>
+        <br/>
             {% for q in recents.question %}
-            <div class="card rp-item">
+            <div class="card rp-item  mx-1">
                 <a class="card-title rp-title" href = "{{q.get_absolute_url}}">{{q.title}}</a>
                 <div class = "card-subtitle mx-1">
                     <i>Date:  {{q.date_created}}
@@ -65,10 +67,11 @@
                 <span>There is nothing for display...</span>
             {% endfor %}
         </div>
-        <div class="row recent-questions">
+        <div class="row recent-questions mx-1">
             <h5 class="rp-title">Recent answers</h5>
+        <br/>
             {% for a in recents.answer %}
-            <div class="card rp-item">
+            <div class="card rp-item  mx-1">
                 <a class="card-title rp-title" href = "{{a.get_absolute_url}}">{{a.question.title}}</a>
                 <div class = "card-subtitle mx-1">
                     <i>at:  {{a.date_created}}

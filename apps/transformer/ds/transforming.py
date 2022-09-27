@@ -28,7 +28,7 @@ def load_hdf_to(origin=False, to_html=False, index=False):
             data = pd.read_hdf(HDF_FILENAME, 'origin')
             data.to_hdf(HDF_FILENAME, 'actual')
     if to_html:
-        return data.head(20).to_html(index=index)
+        return data.head(15).to_html(index=index)
     else:
         return data
 
@@ -50,4 +50,4 @@ def apply_todo(todo: dict) -> dict:
     data = load_hdf_to()
     data = divide_and_transform(data, todo)
     _upload_to_hdf(data, origin=False)
-    return get_hdf_and_stat_html(head=20)
+    return get_hdf_and_stat_html(head=15)
