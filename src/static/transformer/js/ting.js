@@ -18,6 +18,10 @@ function get_cookie(name){
 
 
 function _drawTable_and_statTable(success_json){
+    let dfs = document.getElementsByClassName("dataframe")
+    for (let df of dfs) {
+        df.className = df.className + " table"
+    }
     let table = document.getElementById("table")
     table.innerHTML = success_json.table
     document.getElementById("table_pre_stats").innerHTML = success_json.stats.stat_table;
@@ -89,14 +93,17 @@ function _post_to_transforming(data){
         ).then(
             success => {
                 _drawTable_and_statTable(success)
-                console.log(success)
+                document.getElementById('tr-tools').remove()
+                document.getElementsByClassName("result_table"[0]).className = "col-md-12 col-lg-12"
             }
         ).catch(
           error => {console.log(error);
           }
         );
 }
-
-
-
 collect_tools_apply()
+
+let dfs = document.getElementsByClassName("dataframe")
+for (let df of dfs) {
+        df.className = df.className + " table"
+    }

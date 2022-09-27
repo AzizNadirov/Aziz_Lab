@@ -4,13 +4,13 @@
 {% block body %}
     Transforming !!
     <div class="row">
-        <div class="col-md-8 col-lg-8">
+        <div class="col-md-8 col-lg-8 result_table" >
             <div class="table-responsive table-hover" id="table">
                 {{ table|safe }}
             </div>
         </div>
         <div class="col-md-4 col-lg-4">
-        <form enctype="multipart/form-data" method="post">
+        <form enctype="multipart/form-data" method="post" id="tr-tools">
             {% csrf_token %}
                 <div class="card" id="scaler_card">
                     <div class="card-header">
@@ -99,15 +99,17 @@
                 <div class="card" id="table_info">
                     <span class="card-header h6">Table info:</span>
                     <div class="card-body" id="table_stat">
-                        <div class="table table-responsive table-hover" id="table_pre_stats">
+                        <table class="" id="table_pre_stats">
                             {{ row_col|safe }}
+                        </table>
                             <br>
+                        <table class="table table-responsive table-hover">
                             {{ null_dtype|safe }}
-                        </div>
+                        </table>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary" id="btn_apply">Apply! </button>
-        </form>
+            </form>
     </div>
     </div>
     {% block body_js %}

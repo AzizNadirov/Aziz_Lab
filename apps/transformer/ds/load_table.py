@@ -1,12 +1,12 @@
 import pandas as pd
+import os
 
 
-def hdf_file_name(user_name):
+def get_hdf_file_name(user_name):
     return f"src/media/transformer/storage/{user_name}/data.h5"
 
-
-HDF_FILENAME = "src/media/transformer/storage/data.h5"
-
+def get_hdf_file_dir(user_name):
+    return f"src/media/transformer/storage/{user_name}"
 
 def get_basic_stats(df: pd.DataFrame, to_html=False):
     row_col = pd.DataFrame({'rows': [len(df)], 'cols': [len(df.columns)]})
@@ -22,7 +22,7 @@ def get_basic_stats(df: pd.DataFrame, to_html=False):
     return {'row_col': row_col, 'stat_table': null_dtype}
 
 
-def read_csv_return_html(file, n_rows, html=False, html_index=True,
+def read_csv_return_html(file, n_rows, username:str, html=False, html_index=True,
                          delimiter=',', stat_table_to_html=False):
     """"
     Returns first n_rows in dict/html variant of csv/xls/xlsx file
@@ -34,7 +34,10 @@ def read_csv_return_html(file, n_rows, html=False, html_index=True,
         data = pd.read_excel(file)
     else:
         return -1
-    data.to_hdf(HDF_FILENAME, 'origin', 'w')
+    file_dir = get_hdf_file_dir(username)
+    if not os.path.exists(file_dir):
+        os.mkdir(file_dir)
+    data.to_hdf(get_hdf_file_name(username), 'origin', 'w')
     if n_rows > len(data): n_rows = len(data)
     data_first_n = data.head(n_rows)
     if not html:
@@ -44,11 +47,11 @@ def read_csv_return_html(file, n_rows, html=False, html_index=True,
                 'stats': get_basic_stats(data, to_html=stat_table_to_html)}
 
 
-def get_hdf_and_stat_html(origin=False, head=15):
+def get_hdf_and_stat_html(username:str, origin=False, head=10):
     if origin:
-        data = pd.read_hdf(HDF_FILENAME, 'origin')
+        data = pd.read_hdf(get_hdf_file_name(username), 'origin')
     else:
-        data = pd.read_hdf(HDF_FILENAME, 'actual')
+        data = pd.read_hdf(get_hdf_file_name(username), 'actual')
 
     data_head = data.head(head)
     return {'table': data_head.to_html(index=False), 'stats': get_basic_stats(data, to_html=True)}

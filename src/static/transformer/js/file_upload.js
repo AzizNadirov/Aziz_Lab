@@ -10,7 +10,7 @@ function load_table2(ting_url, aing_url){
     var data = new FormData();
     data.append("file", file_input.files[0]);
     data.append("csrfmiddlewaretoken", csrf_token.value);
-    data.append("delimeter",  document.getElementById("delimeter").value)
+    data.append("delimiter",  document.getElementById("delimeter").value)
 
     fetch(BASE_URL + "apps/transformer/",
         {method: "POST", body: data}
@@ -18,7 +18,6 @@ function load_table2(ting_url, aing_url){
             response => response.json()
         ).then(
             success => {
-                console.log(success)
                 document.getElementById('preload_file').remove()
                 var table = document.getElementById("table")
                 table.innerHTML = success.table
@@ -41,10 +40,10 @@ function load_table2(ting_url, aing_url){
 
 function insert_buttons(url_ting, url_aing){
     const tranform_or_analysis =
-    `<button class="btn-success btn-block" id="btn_transform">
+    `<button class="btn-success btn-block btn-transform" id="btn_transform">
         <a href=${url_ting}>GoTo <b>Transform</b></a>
      </button>
-     <button class="btn-success btn-block" id="btn_analisis">
+     <button class="btn-success btn-block btn-aing" id="btn_analisis">
         <a href=${url_aing}>GoTo <b>Analising</b></a>
      </button>`
 
