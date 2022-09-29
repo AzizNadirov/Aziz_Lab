@@ -5,8 +5,10 @@ import os
 def get_hdf_file_name(user_name):
     return f"src/media/transformer/storage/{user_name}/data.h5"
 
+
 def get_hdf_file_dir(user_name):
     return f"src/media/transformer/storage/{user_name}"
+
 
 def get_basic_stats(df: pd.DataFrame, to_html=False):
     row_col = pd.DataFrame({'rows': [len(df)], 'cols': [len(df.columns)]})
@@ -22,7 +24,7 @@ def get_basic_stats(df: pd.DataFrame, to_html=False):
     return {'row_col': row_col, 'stat_table': null_dtype}
 
 
-def read_csv_return_html(file, n_rows, username:str, html=False, html_index=True,
+def read_csv_return_html(file, n_rows, username: str, html=False, html_index=True,
                          delimiter=',', stat_table_to_html=False):
     """"
     Returns first n_rows in dict/html variant of csv/xls/xlsx file
@@ -47,7 +49,7 @@ def read_csv_return_html(file, n_rows, username:str, html=False, html_index=True
                 'stats': get_basic_stats(data, to_html=stat_table_to_html)}
 
 
-def get_hdf_and_stat_html(username:str, origin=False, head=10):
+def get_hdf_and_stat_html(username: str, origin=False, head=10):
     if origin:
         data = pd.read_hdf(get_hdf_file_name(username), 'origin')
     else:

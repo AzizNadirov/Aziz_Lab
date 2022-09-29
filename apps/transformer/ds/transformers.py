@@ -64,7 +64,6 @@ def _uni_scaler(df: pd.DataFrame, cols_for_scaling: Sequence, scaler: str):
 
     return df
 
-
 def divide_and_transform(df: pd.DataFrame, todo: dict):
     SCALERS = ('std', 'mm', 'rb')
     ENCODERS = ('lb', 'oh')
