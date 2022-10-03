@@ -105,5 +105,5 @@ collect_tools_apply()
 
 let dfs = document.getElementsByClassName("dataframe")
 for (let df of dfs) {
-        df.className = df.className + " table"
+        df.className = df.className + " table mh-25"
     }
